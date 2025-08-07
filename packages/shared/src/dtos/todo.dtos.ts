@@ -10,7 +10,7 @@ type FullTodoDTO = {
 
 type CreateTodoDTO = {
   title: String;
-  status: StatusEnum;
+  status?: StatusEnum;
 };
 
 type UpdateTodoDTO = {

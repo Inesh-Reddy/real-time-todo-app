@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Todo, TodoSchema, User, UserSchema } from './db.schema';
 
 @Module({
   imports: [
@@ -13,6 +14,10 @@ import { MongooseModule } from '@nestjs/mongoose';
       }),
       inject: [ConfigService],
     }),
+    MongooseModule.forFeature([
+      { name: Todo.name, schema: TodoSchema },
+      { name: User.name, schema: UserSchema },
+    ]),
   ],
   exports: [MongooseModule],
 })
