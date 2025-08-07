@@ -11,7 +11,7 @@ export class Todo extends Document {
   @Prop()
   priority: string;
   @Prop({
-    type: Object.values(StatusEnum as any as Record<string, string>),
+    enum: Object.values(StatusEnum as any as Record<string, string>),
     required: true,
   })
   status: StatusEnum;
