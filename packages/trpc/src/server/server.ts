@@ -22,7 +22,24 @@ const appRouter = t.router({
       description: z.string(),
       priority: z.string(),
       status: z.enum(StatusValues as [string, ...string[]]),
-    })).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any)
+    })).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any),
+    updateTodo: publicProcedure.input(z.object({
+      id: z.string().optional(),
+      title: z.string().optional(),
+      description: z.string().optional(),
+      priority: z.string().optional(),
+      status: z.enum(StatusValues as [string, ...string[]]).optional(),
+    })).output(z.object({
+      id: z.string().optional(),
+      title: z.string(),
+      description: z.string(),
+      priority: z.string(),
+      status: z.enum(StatusValues as [string, ...string[]]),
+    })).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any),
+    deleteTodo: publicProcedure.input(z.object({
+      id: z.string().optional(),
+      title: z.string().optional(),
+    })).output(z.string()).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any)
   })
 });
 export type AppRouter = typeof appRouter;
