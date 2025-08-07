@@ -9,7 +9,6 @@ export class TodoService {
   constructor(@InjectModel('Todo') private readonly todoModel: Model<Todo>) {}
 
   async getAllTodos(): Promise<TodoTypesDTO.Todo[]> {
-    console.log(`Reached service`);
     try {
       const result = await this.todoModel.find();
       const finalData = result.map((todo) => ({
