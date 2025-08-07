@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { Input, Mutation, Query, Router } from 'nestjs-trpc';
 import { TodoService } from './todo.service';
-import { zCreateTodo, zTodo } from './todo.schema';
+import { zCreateTodo, zDeleteTodo, zTodo, zUpdateTodo } from './todo.schema';
 import { TodoTypesDTO } from '@repo/shared';
 import z from 'zod';
 
@@ -24,5 +24,23 @@ export class TodoRouter {
     @Input() input: TodoTypesDTO.CreateTodo,
   ): Promise<TodoTypesDTO.Todo> {
     return this.todoService.createTodo(input);
+  }
+
+  @Mutation({
+    input: zUpdateTodo,
+    output: zTodo,
+  })
+  updateTodo(
+    @Input() input: TodoTypesDTO.UpdateTodo,
+  ): Promise<TodoTypesDTO.Todo> {
+    return this.todoService.updateTodo(input);
+  }
+
+  @Mutation({
+    input: zDeleteTodo,
+    output: z.string(),
+  })
+  deleteTodo(@Input() input: TodoTypesDTO.DeleteTodo): Promise<string> {
+    return this.todoService.deleteTodo(input);
   }
 }
